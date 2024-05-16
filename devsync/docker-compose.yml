@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  dev-sync-db:
+    image: postgres
+    restart: always
+    container_name: dev-sync-db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: code
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+
+volumes:
+  postgres:
