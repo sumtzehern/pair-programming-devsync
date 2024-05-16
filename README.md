@@ -1,1 +1,1 @@
-# pair-programming-devsync
+# DevSync - Pair Programming Website
