@@ -10,6 +10,7 @@ import {
   import postgres from "postgres"
   import { drizzle } from "drizzle-orm/postgres-js"
   import type { AdapterAccount } from "next-auth/adapters"
+import { sql } from "drizzle-orm";
 
   export const testing = pgTable("testing", {
     id: text("id").notNull().primaryKey(),
@@ -74,3 +75,17 @@ import {
       compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
     })
   )
+
+  export const room = pgTable("room", {
+    id: uuid("id").default(sql`gen_random_uuid()`).notNull()
+      .primaryKey(),
+    userId: text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    description: text("description"),
+    languages: text("languages").notNull(),
+    githubRepo: text("githubRepo"),
+  })
+
+  export type Room = typeof room.$inferSelect;
