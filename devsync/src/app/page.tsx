@@ -12,6 +12,7 @@ import {
 import { Room } from "@/db/schema";
 import { GithubIcon } from "lucide-react";
 import { getRooms } from "@/data-access/room";
+import { TagsList, splitTags } from "@/components/ui/tags-list";
 
 export default async function Home() {
   const rooms = await getRooms();
@@ -22,7 +23,8 @@ export default async function Home() {
         <CardTitle>{room.name}</CardTitle>
         <CardDescription>{room.description}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-4">
+      <TagsList tags={splitTags(room.tags)} />
         {
           room.githubRepo && (
             <Link href={room.githubRepo}
@@ -36,7 +38,7 @@ export default async function Home() {
       </CardContent>
       <CardFooter>
         <Button asChild> 
-          <Link href={`/room/${room.id}`}>Join Room</Link>
+          <Link href={`/rooms/${room.id}`}>Join Room</Link>
         </Button>
       </CardFooter>
     </Card>;

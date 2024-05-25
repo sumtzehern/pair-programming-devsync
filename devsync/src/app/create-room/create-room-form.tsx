@@ -25,7 +25,7 @@ const formSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(250),
   githubRepo: z.string().min(1).max(250),
-  languages: z.string().min(1).max(50),
+  tags: z.string().min(1).max(50),
 })
 
 
@@ -38,7 +38,7 @@ export function CreateRoomForm() {
         name: "",
         description: "",
         githubRepo: "",
-        languages: "",
+        tags: "",
       }
   });
 
@@ -63,7 +63,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="e.g. Full Stack Development"/>
               </FormControl>
               <FormDescription>
                 This is your public room name.
@@ -79,7 +79,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input  {...field} />
+                <Input  {...field} placeholder="e.g. Learn Next.js"/>
               </FormControl>
               <FormDescription>
                 What you will be coding on
@@ -96,7 +96,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>GitHub Repo</FormLabel>
               <FormControl>
-                <Input  {...field} />
+                <Input  {...field} placeholder="e.g. https://github.com/username/project"/>
               </FormControl>
               <FormDescription>
                 Please put a link to the project you are working on
@@ -108,15 +108,15 @@ export function CreateRoomForm() {
 
         <FormField
           control={form.control}
-          name="languages"
+          name="tags"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Tech Stack</FormLabel>
               <FormControl>
-                <Input  {...field} />
+                <Input  {...field} placeholder="e.g. React, Next.js, TypeScript"/>
               </FormControl>
               <FormDescription>
-                List the primary programming language used in your project.
+                List the tech stack used in your project.
               </FormDescription>
               <FormMessage />
             </FormItem>
