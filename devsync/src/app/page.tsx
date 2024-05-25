@@ -12,8 +12,9 @@ import {
 import { Room } from "@/db/schema";
 import { GithubIcon } from "lucide-react";
 import { getRooms } from "@/data-access/room";
-import { TagsList, splitTags } from "@/components/ui/tags-list";
+import { TagsList } from "@/components/ui/tags-list";
 import { SearchBar } from "./search-bar";
+import { splitTags } from "@/lib/utils";
 
 export default async function Home({searchParams}: {searchParams: {search: string}}) {
   const rooms = await getRooms(searchParams.search);
@@ -53,6 +54,7 @@ export default async function Home({searchParams}: {searchParams: {search: strin
           <Link href="/create-room">Create Room</Link>
         </Button>
       </div>
+      
       <div className="mb-10">
       <SearchBar />
       </div>

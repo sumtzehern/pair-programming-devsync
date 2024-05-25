@@ -16,10 +16,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { createRoomAction } from "./actions"
-import { Router } from "lucide-react"
 import { useRouter } from "next/navigation";
-// import { useToast } from "@/components/ui/use-toast";
-
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -28,30 +25,29 @@ const formSchema = z.object({
   tags: z.string().min(1).max(50),
 })
 
-
 export function CreateRoomForm() {
-    const router = useRouter();
+  const router = useRouter();
 
-    const form = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        name: "",
-        description: "",
-        githubRepo: "",
-        tags: "",
-      }
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      description: "",
+      githubRepo: "",
+      tags: "",
+    }
   });
 
-    /**
-     * Handles the form submission.
-     *
-     * @param {z.infer<typeof formSchema>} values - The form values inferred from the formSchema.
-     */
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-        const room = await createRoomAction(values);
-        router.push("/");
-        
-      }
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // Convert tags to lowercase
+    const lowerCaseValues = {
+      ...values,
+      tags: values.tags.toLowerCase(),
+    };
+
+    const room = await createRoomAction(lowerCaseValues);
+    router.push("/");
+  }
 
   return (
     <Form {...form}>
@@ -63,7 +59,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="e.g. Full Stack Development"/>
+                <Input {...field} placeholder="e.g. Full Stack Development" />
               </FormControl>
               <FormDescription>
                 This is your public room name.
@@ -72,14 +68,14 @@ export function CreateRoomForm() {
             </FormItem>
           )}
         />
-              <FormField
+        <FormField
           control={form.control}
           name="description"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input  {...field} placeholder="e.g. Learn Next.js"/>
+                <Input {...field} placeholder="e.g. Learn Next.js" />
               </FormControl>
               <FormDescription>
                 What you will be coding on
@@ -88,7 +84,6 @@ export function CreateRoomForm() {
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name="githubRepo"
@@ -96,7 +91,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>GitHub Repo</FormLabel>
               <FormControl>
-                <Input  {...field} placeholder="e.g. https://github.com/username/project"/>
+                <Input {...field} placeholder="e.g. https://github.com/username/project" />
               </FormControl>
               <FormDescription>
                 Please put a link to the project you are working on
@@ -104,8 +99,7 @@ export function CreateRoomForm() {
               <FormMessage />
             </FormItem>
           )}
-          />  
-
+        />
         <FormField
           control={form.control}
           name="tags"
@@ -113,7 +107,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Tech Stack</FormLabel>
               <FormControl>
-                <Input  {...field} placeholder="e.g. React, Next.js, TypeScript"/>
+                <Input {...field} placeholder="e.g. React, Next.js, TypeScript" />
               </FormControl>
               <FormDescription>
                 List the tech stack used in your project.
@@ -121,11 +115,9 @@ export function CreateRoomForm() {
               <FormMessage />
             </FormItem>
           )}
-          />
-
+        />
         <Button type="submit">Submit</Button>
       </form>
     </Form>
   )
-
 }

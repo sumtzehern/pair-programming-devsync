@@ -7,11 +7,10 @@ import { like } from "drizzle-orm";
 
 export async function getRooms(search: string | undefined) {
     unstable_noStore();
-    const where = search ? like(room.name, `%${search}%`) : undefined;
+    const where = search ? like(room.tags, `%${search}%`) : undefined;
     const rooms = await db.query.room.findMany({
         where,
-    }
-    );
+    });
     return rooms;
 }
 
