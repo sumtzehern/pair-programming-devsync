@@ -70,6 +70,12 @@ export function Header() {
                         <span className="text-red-400">c</span>
                     </span>
                 </Link>
+
+                <nav>
+                    <Link href="/your-rooms" className="hover:text-blue-500">
+                        Your Rooms
+                    </Link>
+                </nav>
                 <div className="flex items-center gap-4">
                     {
                         session.data && <AccountDropdown />

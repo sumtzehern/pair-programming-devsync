@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 // import { badgeVariants } from "./ui/badge";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 export function TagsList({ tags }: { tags: string[] }) {
   const router = useRouter();
@@ -10,13 +11,12 @@ export function TagsList({ tags }: { tags: string[] }) {
     <div className="flex gap-2 flex-wrap">
       {tags.map((tag) => (
         <button
-          // className={cn(badgeVariants())}
           key={tag}
           onClick={() => {
-            router.push(`/browse?search=${tag}`);
+            router.push(`/?search=${tag}`);
           }}
         >
-          {tag}
+          <Badge className="w-fit cursor-pointer">{tag}</Badge>
         </button>
       ))}
     </div>

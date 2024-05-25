@@ -15,8 +15,10 @@ import { getRooms } from "@/data-access/room";
 import { TagsList } from "@/components/ui/tags-list";
 import { SearchBar } from "./search-bar";
 import { splitTags } from "@/lib/utils";
+import { unstable_noStore } from "next/cache";
 
 export default async function Home({searchParams}: {searchParams: {search: string}}) {
+  unstable_noStore();
   const rooms = await getRooms(searchParams.search);
 
   function RoomCard({room}: {room: Room}) {

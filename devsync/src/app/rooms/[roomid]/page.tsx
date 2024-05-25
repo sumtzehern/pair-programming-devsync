@@ -5,6 +5,7 @@ import { DevFinderVideo } from "./video-player";
 import { splitTags } from "@/lib/utils";
 import { unstable_noStore } from "next/cache";
 import { getRoom } from "@/data-access/room";
+import { TagsList } from "@/components/ui/tags-list";
 
 export default async function RoomPage(props: { params: { roomId: string } }) {
   unstable_noStore();

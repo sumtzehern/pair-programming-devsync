@@ -40,12 +40,12 @@ export function CreateRoomForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Convert tags to lowercase
-    const lowerCaseValues = {
-      ...values,
-      tags: values.tags.toLowerCase(),
-    };
+    // const lowerCaseValues = {
+    //   ...values,
+    //   tags: values.tags.toLowerCase(),
+    // };
 
-    const room = await createRoomAction(lowerCaseValues);
+    const room = await createRoomAction(values);
     router.push("/");
   }
 
