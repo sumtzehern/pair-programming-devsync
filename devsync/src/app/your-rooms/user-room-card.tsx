@@ -53,7 +53,7 @@ export function UserRoomCard({ room }: { room: Room }) {
           </Link>
         )}
       </CardContent>
-      <CardFooter className="flex gap-2">
+      <CardFooter className="flex gap-2 justify-between ">
         <Button asChild>
           <Link href={`/rooms/${room.id}`}>Join Room</Link>
         </Button>
@@ -61,7 +61,7 @@ export function UserRoomCard({ room }: { room: Room }) {
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button variant={"destructive"}>
-              <TrashIcon className="w-4 h-4 mr-2" /> Delete Room
+              <TrashIcon className="w-3 h-3 mr-2" /> Delete Room
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
