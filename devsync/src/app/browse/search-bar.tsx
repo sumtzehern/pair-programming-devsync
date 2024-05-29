@@ -22,26 +22,26 @@ const formSchema = z.object({
 
 export function SearchBar() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const searchQuery = searchParams.get("search");
+  const query = useSearchParams();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      search: searchQuery ?? "",
+      search: query.get("search") ?? "",
     },
   });
 
+  const search = query.get("search");
+
   useEffect(() => {
-    form.setValue("search", searchQuery ?? "");
-  }, [searchQuery, form]);
+    form.setValue("search", search ?? "");
+  }, [search, form]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (values.search) {
-      router.push(`/?search=${values.search}`);
+      router.push(`/browse?search=${values.search}`);
     } else {
-      router.push("/");
+      router.push("/browse");
     }
   }
 
@@ -69,7 +69,7 @@ export function SearchBar() {
           <SearchIcon className="mr-2" /> Search
         </Button>
 
-        {searchQuery && (
+        {query.get("search") && (
           <Button
             variant="link"
             onClick={() => {

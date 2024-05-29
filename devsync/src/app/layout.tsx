@@ -5,6 +5,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Provider } from "./provider";
 import { Header } from "./header";
 import NextTopLoader from 'nextjs-toploader';
+import { Toaster } from "@/components/ui/toaster"
 
 
 
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Provider>
+        <Toaster />
             <NextTopLoader />
             <Header />
             {children}

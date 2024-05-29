@@ -1,9 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-// import { badgeVariants } from "./ui/badge";
+import { badgeVariants } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 
 export function TagsList({ tags }: { tags: string[] }) {
   const router = useRouter();
@@ -12,11 +11,12 @@ export function TagsList({ tags }: { tags: string[] }) {
       {tags.map((tag) => (
         <button
           key={tag}
+          className={cn(badgeVariants(), )}
           onClick={() => {
-            router.push(`/?search=${tag}`);
+            router.push(`/browse?search=${tag}`);
           }}
         >
-          <Badge className="w-fit cursor-pointer">{tag}</Badge>
+          {tag}
         </button>
       ))}
     </div>

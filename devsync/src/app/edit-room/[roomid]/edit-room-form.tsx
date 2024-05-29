@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-
-import { Button } from "@/components/ui/button"
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,40 +12,41 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { createRoomAction } from "./actions"
-import { useRouter } from "next/navigation";
-import { useToast } from "@/components/ui/use-toast"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { editRoomAction } from "./actions";
+import { useParams } from "next/navigation";
+import { Room } from "@/db/schema";
+import { toast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(250),
-  githubRepo: z.string().min(1).max(250),
+  githubRepo: z.string().min(1).max(50),
   tags: z.string().min(1).max(50),
-})
+});
 
-export function CreateRoomForm() {
-  const {toast} = useToast();
-  const router = useRouter();
-
+export function EditRoomForm({ room }: { room: Room }) {
+  const params = useParams();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      githubRepo: "",
-      tags: "",
-    }
+      name: room.name,
+      description: room.description ?? "",
+      githubRepo: room.githubRepo ?? "",
+      tags: room.tags,
+    },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const room = await createRoomAction(values);
-    toast({
-      title: "Room Created",
-      description: "Your room was successfully created",
+    await editRoomAction({
+      id: params.roomid as string,
+      ...values,
     });
-    router.push(`/rooms/${room.id}`);
+    toast({
+      title: "Room Updated",
+      description: "Your room was successfully updated",
+    });
   }
 
   return (
@@ -59,15 +59,14 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="e.g. Full Stack Development" />
+                <Input {...field} placeholder="Dev Sync Is Cool" />
               </FormControl>
-              <FormDescription>
-                This is your public room name.
-              </FormDescription>
+              <FormDescription>This is your public room name.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="description"
@@ -75,23 +74,30 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="e.g. Learn Next.js" />
+                <Input
+                  {...field}
+                  placeholder="Im working on a side project, come join me"
+                />
               </FormControl>
               <FormDescription>
-                What you will be coding on
+                Please describe what you are be coding on
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="githubRepo"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>GitHub Repo</FormLabel>
+              <FormLabel>Github Repo</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="e.g. https://github.com/username/project" />
+                <Input
+                  {...field}
+                  placeholder="https://github.com/webdevcody/dev-finder"
+                />
               </FormControl>
               <FormDescription>
                 Please put a link to the project you are working on
@@ -100,24 +106,26 @@ export function CreateRoomForm() {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Tech Stack</FormLabel>
+              <FormLabel>Tags</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="e.g. React, Next.js, TypeScript" />
+                <Input {...field} placeholder="typescript, nextjs, tailwind" />
               </FormControl>
               <FormDescription>
-                List the tech stack used in your project.
+                List your Tech Stack
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+
+        <Button type="submit">Update</Button>
       </form>
     </Form>
-  )
+  );
 }
