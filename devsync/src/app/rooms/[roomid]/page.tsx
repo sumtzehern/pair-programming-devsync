@@ -7,9 +7,9 @@ import { unstable_noStore } from "next/cache";
 import { getRoom } from "@/data-access/room";
 import { TagsList } from "@/components/ui/tags-list";
 
-export default async function RoomPage(props: { params: { roomId: string } }) {
+export default async function RoomPage(props: { params: { roomid: string } }) {
   unstable_noStore();
-  const roomId = props.params.roomId;
+  const roomId = props.params.roomid;
 
   const room = await getRoom(roomId);
 
