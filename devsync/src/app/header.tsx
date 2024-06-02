@@ -25,7 +25,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useState } from "react";
-import { deleteAccountAction } from "./action";
+// import { deleteAccountAction } from "./actions";
 
 function AccountDropdown() {
   const session = useSession();
@@ -33,10 +33,10 @@ function AccountDropdown() {
 
   return (
     <>
-      <AlertDialog open={open} onOpenChange={setOpen}>
+      {/* <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently remove your
               account and any data your have.
@@ -54,14 +54,14 @@ function AccountDropdown() {
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
-      </AlertDialog>
+      </AlertDialog> */}
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant={"link"}>
             <Avatar className="mr-2">
               <AvatarImage src={session.data?.user?.image ?? ""} />
-              <AvatarFallback>TT</AvatarFallback>
+              <AvatarFallback>CN</AvatarFallback>
             </Avatar>
 
             {session.data?.user?.name}

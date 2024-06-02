@@ -7,6 +7,8 @@ export default async function EditRoomPage({
 }: {
   params: { roomid: string };
 }) {
+  // Log to ensure params is received correctly
+  console.log("Received params:", params);
 
   if (!params.roomid) {
     return <div>Invalid parameters</div>;
@@ -14,6 +16,9 @@ export default async function EditRoomPage({
 
   unstable_noStore();
   const room = await getRoom(params.roomid);
+
+  // Log to ensure room is fetched correctly
+  console.log("Fetched room:", room);
 
   if (!room) {
     return <div>Room not found</div>;
