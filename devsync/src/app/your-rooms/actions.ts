@@ -1,6 +1,6 @@
 'use server';
 
-import { deletRoom, getRoom } from "@/data-access/room";
+import { deleteRoom, getRoom } from "@/data-access/room";
 import { getSession } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 
@@ -16,7 +16,7 @@ export async function deleteRoomAction(roomId: string) {
     if (!room) {
         throw new Error("Room not found");
     }
-    await deletRoom(roomId);
+    await deleteRoom(roomId);
 
     revalidatePath ("/your-rooms");
 }
