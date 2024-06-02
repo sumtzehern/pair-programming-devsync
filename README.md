@@ -22,3 +22,4 @@ DevSync is built using the following technologies:
 2. **Create a Room**: Once signed in, users can create a room for pair programming or collaboration.
 3. **Start Sharing**: Users can start sharing their screens and work together in real-time.
 4. **Manage Account**: Users can delete their rooms or accounts by navigating to the dashboard.
+

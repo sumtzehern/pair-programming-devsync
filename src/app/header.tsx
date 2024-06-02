@@ -25,7 +25,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useState } from "react";
-// import { deleteAccountAction } from "./actions";
+import { deleteAccountAction } from "./action";
 
 function AccountDropdown() {
   const session = useSession();
@@ -33,7 +33,7 @@ function AccountDropdown() {
 
   return (
     <>
-      {/* <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -54,7 +54,7 @@ function AccountDropdown() {
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
-      </AlertDialog> */}
+      </AlertDialog>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

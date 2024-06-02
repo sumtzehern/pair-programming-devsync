@@ -22,7 +22,7 @@ import { toast } from "@/components/ui/use-toast";
 const formSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(250),
-  githubRepo: z.string().min(1).max(50),
+  githubRepo: z.string().min(1).max(200),
   tags: z.string().min(1).max(50),
 });
 
@@ -96,7 +96,7 @@ export function EditRoomForm({ room }: { room: Room }) {
               <FormControl>
                 <Input
                   {...field}
-                  placeholder="https://github.com/webdevcody/dev-finder"
+                  placeholder="https://github.com/webdev/devsync"
                 />
               </FormControl>
               <FormDescription>
