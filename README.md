@@ -4,6 +4,8 @@ DevSync is a project inspired by the importance of pair programming. It aims to 
 
 ## Try it out
 https://devsync-kappa.vercel.app/
+[![Video Title]([https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE](https://youtu.be/v28NR8KSd1A))
+
 
 ## Tech Stack
 
