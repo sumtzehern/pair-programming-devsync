@@ -3,8 +3,9 @@
 DevSync is a project inspired by the importance of pair programming. It aims to provide a platform where developers can help each other on projects or students can collaborate on assignments together through screen sharing.
 
 ## Try it out
-[https://devsync-kappa.vercel.app/
-](https://pair-programming-dev-sync.up.railway.app/)
+[https://devsync-kappa.vercel.app/](https://pair-programming-dev-sync.up.railway.app/)
+
+
 [![Video Title](https://img.youtube.com/vi/v28NR8KSd1A/0.jpg)](https://www.youtube.com/watch?v=v28NR8KSd1A)
 
 
